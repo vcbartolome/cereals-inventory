@@ -1,0 +1,101 @@
+Box Number,Shelf Code,Type,Area Planted,Year(s),Season,Location,Description,Pedigree,Weight (kg),Remarks
+1,A,white,LBTR,2020,wet,LBTR,Sample inventory item 001,S-101,0.88,
+2,B,yellow,LBPD,2021,dry,LBPD,Sample inventory item 002,S-102,1.01,Verified at intake
+3,C,sorghum,CMU,2022,wet,CMU,Sample inventory item 003,S-103,1.14,Needs recheck
+4,D,special maize,LBTR,2023,dry,LBTR,Sample inventory item 004,S-104,1.27,Packed for transfer
+5,E,white,LBPD,2024,wet,LBPD,Sample inventory item 005,S-105,1.4,Inventory sample row
+6,F,yellow,CMU,2025,dry,CMU,Sample inventory item 006,S-106,1.53,
+7,G,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 007,S-107,1.66,Verified at intake
+8,H,special maize,LBPD,2021,dry,LBPD,Sample inventory item 008,S-108,1.79,Needs recheck
+9,I,white,CMU,2022,wet,CMU,Sample inventory item 009,S-109,1.92,Packed for transfer
+10,J,yellow,LBTR,2023,dry,LBTR,Sample inventory item 010,S-110,2.05,Inventory sample row
+11,K,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 011,S-111,2.18,
+12,L,special maize,CMU,2025,dry,CMU,Sample inventory item 012,S-112,2.31,Verified at intake
+13,M,white,LBTR,2020,wet,LBTR,Sample inventory item 013,S-113,2.44,Needs recheck
+14,N,yellow,LBPD,2021,dry,LBPD,Sample inventory item 014,S-114,2.57,Packed for transfer
+15,O,sorghum,CMU,2022,wet,CMU,Sample inventory item 015,S-115,2.7,Inventory sample row
+16,P,special maize,LBTR,2023,dry,LBTR,Sample inventory item 016,S-116,2.83,
+17,Q,white,LBPD,2024,wet,LBPD,Sample inventory item 017,S-117,2.96,Verified at intake
+18,R,yellow,CMU,2025,dry,CMU,Sample inventory item 018,S-118,3.09,Needs recheck
+19,S,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 019,S-119,3.22,Packed for transfer
+20,T,special maize,LBPD,2021,dry,LBPD,Sample inventory item 020,S-120,3.35,Inventory sample row
+21,U,white,CMU,2022,wet,CMU,Sample inventory item 021,S-121,3.48,
+22,V,yellow,LBTR,2023,dry,LBTR,Sample inventory item 022,S-122,3.61,Verified at intake
+23,W,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 023,S-123,3.74,Needs recheck
+24,X,special maize,CMU,2025,dry,CMU,Sample inventory item 024,S-124,3.87,Packed for transfer
+25,Y,white,LBTR,2020,wet,LBTR,Sample inventory item 025,S-125,4.0,Inventory sample row
+26,Z,yellow,LBPD,2021,dry,LBPD,Sample inventory item 026,S-126,4.13,
+27,A,sorghum,CMU,2022,wet,CMU,Sample inventory item 027,S-127,4.26,Verified at intake
+28,B,special maize,LBTR,2023,dry,LBTR,Sample inventory item 028,S-128,4.39,Needs recheck
+29,C,white,LBPD,2024,wet,LBPD,Sample inventory item 029,S-129,4.52,Packed for transfer
+30,D,yellow,CMU,2025,dry,CMU,Sample inventory item 030,S-130,4.65,Inventory sample row
+31,E,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 031,S-131,4.78,
+32,F,special maize,LBPD,2021,dry,LBPD,Sample inventory item 032,S-132,4.91,Verified at intake
+33,G,white,CMU,2022,wet,CMU,Sample inventory item 033,S-133,5.04,Needs recheck
+34,H,yellow,LBTR,2023,dry,LBTR,Sample inventory item 034,S-134,5.17,Packed for transfer
+35,I,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 035,S-135,5.3,Inventory sample row
+36,J,special maize,CMU,2025,dry,CMU,Sample inventory item 036,S-136,5.43,
+37,K,white,LBTR,2020,wet,LBTR,Sample inventory item 037,S-137,5.56,Verified at intake
+38,L,yellow,LBPD,2021,dry,LBPD,Sample inventory item 038,S-138,5.69,Needs recheck
+39,M,sorghum,CMU,2022,wet,CMU,Sample inventory item 039,S-139,5.82,Packed for transfer
+40,N,special maize,LBTR,2023,dry,LBTR,Sample inventory item 040,S-140,5.95,Inventory sample row
+41,O,white,LBPD,2024,wet,LBPD,Sample inventory item 041,S-141,6.08,
+42,P,yellow,CMU,2025,dry,CMU,Sample inventory item 042,S-142,6.21,Verified at intake
+43,Q,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 043,S-143,6.34,Needs recheck
+44,R,special maize,LBPD,2021,dry,LBPD,Sample inventory item 044,S-144,6.47,Packed for transfer
+45,S,white,CMU,2022,wet,CMU,Sample inventory item 045,S-145,6.6,Inventory sample row
+46,T,yellow,LBTR,2023,dry,LBTR,Sample inventory item 046,S-146,6.73,
+47,U,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 047,S-147,6.86,Verified at intake
+48,V,special maize,CMU,2025,dry,CMU,Sample inventory item 048,S-148,6.99,Needs recheck
+49,W,white,LBTR,2020,wet,LBTR,Sample inventory item 049,S-149,7.12,Packed for transfer
+50,X,yellow,LBPD,2021,dry,LBPD,Sample inventory item 050,S-150,7.25,Inventory sample row
+51,Y,sorghum,CMU,2022,wet,CMU,Sample inventory item 051,S-151,7.38,
+52,Z,special maize,LBTR,2023,dry,LBTR,Sample inventory item 052,S-152,7.51,Verified at intake
+53,A,white,LBPD,2024,wet,LBPD,Sample inventory item 053,S-153,7.64,Needs recheck
+54,B,yellow,CMU,2025,dry,CMU,Sample inventory item 054,S-154,7.77,Packed for transfer
+55,C,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 055,S-155,7.9,Inventory sample row
+56,D,special maize,LBPD,2021,dry,LBPD,Sample inventory item 056,S-156,8.03,
+57,E,white,CMU,2022,wet,CMU,Sample inventory item 057,S-157,8.16,Verified at intake
+58,F,yellow,LBTR,2023,dry,LBTR,Sample inventory item 058,S-158,8.29,Needs recheck
+59,G,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 059,S-159,8.42,Packed for transfer
+60,H,special maize,CMU,2025,dry,CMU,Sample inventory item 060,S-160,8.55,Inventory sample row
+61,I,white,LBTR,2020,wet,LBTR,Sample inventory item 061,S-161,8.68,
+62,J,yellow,LBPD,2021,dry,LBPD,Sample inventory item 062,S-162,8.81,Verified at intake
+63,K,sorghum,CMU,2022,wet,CMU,Sample inventory item 063,S-163,8.94,Needs recheck
+64,L,special maize,LBTR,2023,dry,LBTR,Sample inventory item 064,S-164,9.07,Packed for transfer
+65,M,white,LBPD,2024,wet,LBPD,Sample inventory item 065,S-165,9.2,Inventory sample row
+66,N,yellow,CMU,2025,dry,CMU,Sample inventory item 066,S-166,9.33,
+67,O,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 067,S-167,9.46,Verified at intake
+68,P,special maize,LBPD,2021,dry,LBPD,Sample inventory item 068,S-168,9.59,Needs recheck
+69,Q,white,CMU,2022,wet,CMU,Sample inventory item 069,S-169,9.72,Packed for transfer
+70,R,yellow,LBTR,2023,dry,LBTR,Sample inventory item 070,S-170,9.85,Inventory sample row
+71,S,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 071,S-171,9.98,
+72,T,special maize,CMU,2025,dry,CMU,Sample inventory item 072,S-172,10.11,Verified at intake
+73,U,white,LBTR,2020,wet,LBTR,Sample inventory item 073,S-173,10.24,Needs recheck
+74,V,yellow,LBPD,2021,dry,LBPD,Sample inventory item 074,S-174,10.37,Packed for transfer
+75,W,sorghum,CMU,2022,wet,CMU,Sample inventory item 075,S-175,10.5,Inventory sample row
+76,X,special maize,LBTR,2023,dry,LBTR,Sample inventory item 076,S-176,10.63,
+77,Y,white,LBPD,2024,wet,LBPD,Sample inventory item 077,S-177,10.76,Verified at intake
+78,Z,yellow,CMU,2025,dry,CMU,Sample inventory item 078,S-178,10.89,Needs recheck
+79,A,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 079,S-179,11.02,Packed for transfer
+80,B,special maize,LBPD,2021,dry,LBPD,Sample inventory item 080,S-180,11.15,Inventory sample row
+81,C,white,CMU,2022,wet,CMU,Sample inventory item 081,S-181,11.28,
+82,D,yellow,LBTR,2023,dry,LBTR,Sample inventory item 082,S-182,11.41,Verified at intake
+83,E,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 083,S-183,11.54,Needs recheck
+84,F,special maize,CMU,2025,dry,CMU,Sample inventory item 084,S-184,11.67,Packed for transfer
+85,G,white,LBTR,2020,wet,LBTR,Sample inventory item 085,S-185,11.8,Inventory sample row
+86,H,yellow,LBPD,2021,dry,LBPD,Sample inventory item 086,S-186,11.93,
+87,I,sorghum,CMU,2022,wet,CMU,Sample inventory item 087,S-187,12.06,Verified at intake
+88,J,special maize,LBTR,2023,dry,LBTR,Sample inventory item 088,S-188,12.19,Needs recheck
+89,K,white,LBPD,2024,wet,LBPD,Sample inventory item 089,S-189,12.32,Packed for transfer
+90,L,yellow,CMU,2025,dry,CMU,Sample inventory item 090,S-190,12.45,Inventory sample row
+91,M,sorghum,LBTR,2020,wet,LBTR,Sample inventory item 091,S-191,12.58,
+92,N,special maize,LBPD,2021,dry,LBPD,Sample inventory item 092,S-192,12.71,Verified at intake
+93,O,white,CMU,2022,wet,CMU,Sample inventory item 093,S-193,12.84,Needs recheck
+94,P,yellow,LBTR,2023,dry,LBTR,Sample inventory item 094,S-194,12.97,Packed for transfer
+95,Q,sorghum,LBPD,2024,wet,LBPD,Sample inventory item 095,S-195,13.1,Inventory sample row
+96,R,special maize,CMU,2025,dry,CMU,Sample inventory item 096,S-196,13.23,
+97,S,white,LBTR,2020,wet,LBTR,Sample inventory item 097,S-197,13.36,Verified at intake
+98,T,yellow,LBPD,2021,dry,LBPD,Sample inventory item 098,S-198,13.49,Needs recheck
+99,U,sorghum,CMU,2022,wet,CMU,Sample inventory item 099,S-199,13.62,Packed for transfer
+100,V,special maize,LBTR,2023,dry,LBTR,Sample inventory item 100,S-200,13.75,Inventory sample row
