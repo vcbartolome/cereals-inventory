@@ -91,7 +91,7 @@ export default function Home() {
           if (match) {
             const operator = match[1];
             const value = parseInt(match[2]);
-            const itemYear = parseInt(item.year);
+            const itemYear = item.year ? parseInt(item.year) : NaN;
 
             switch (operator) {
               case "<":
@@ -119,7 +119,7 @@ export default function Home() {
           if (match) {
             const operator = match[1];
             const value = parseFloat(match[2]);
-            const itemWeight = item.weight;
+            const itemWeight = item.weight ?? NaN;
 
             switch (operator) {
               case "<":

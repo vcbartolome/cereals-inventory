@@ -246,36 +246,33 @@ function RowDialog<TData extends Record<string, any>>({
   const handleChange = (key: string, value: any) => {
     setEditValues((prev) => ({ ...prev, [key]: value }));
   };
+
+  const formatLogValue = (value: unknown, fallback = "Unknown") => {
+    if (value === undefined || value === null || value === "") {
+      return fallback;
+    }
+    return String(value);
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setWeightError(null);
     setRequiredError(null);
-    // Check if weight is a valid number
     const weightValue = (editValues as any).weight;
     const parsedWeight =
       typeof weightValue === "string" ? parseFloat(weightValue) : weightValue;
     if (
-      weightValue === undefined ||
-      weightValue === null ||
-      weightValue === "" ||
+      weightValue !== undefined &&
+      weightValue !== null &&
+      weightValue !== "" &&
       isNaN(parsedWeight)
     ) {
       setWeightError("Weight must be a valid number.");
+      setIsSubmitting(false);
       return;
     }
-    // Check required fields (all except remarks)
-    const requiredFields = [
-      "box_number",
-      "shelf_code",
-      "type",
-      "area_planted",
-      "year",
-      "season",
-      "location",
-      "description",
-      "pedigree",
-      "weight",
-    ];
+    // Only box_number is required now; other fields may be blank
+    const requiredFields = ["box_number"];
     const missing: string[] = [];
     for (const field of requiredFields) {
       const val = (editValues as any)[field];
@@ -294,8 +291,13 @@ function RowDialog<TData extends Record<string, any>>({
       // Prepare values for saving: convert weight to number if possible
       const valuesToSave = { ...editValues };
       if (typeof (valuesToSave as any).weight === "string") {
-        const parsed = parseFloat((valuesToSave as any).weight);
-        (valuesToSave as any).weight = isNaN(parsed) ? null : parsed;
+        const weightString = (valuesToSave as any).weight.trim();
+        if (weightString === "") {
+          delete (valuesToSave as any).weight;
+        } else {
+          const parsed = parseFloat(weightString);
+          (valuesToSave as any).weight = isNaN(parsed) ? null : parsed;
+        }
       }
       if (typeof (valuesToSave as any).box_number === "string") {
         const parsedBox = parseFloat((valuesToSave as any).box_number);
@@ -325,7 +327,7 @@ function RowDialog<TData extends Record<string, any>>({
       await updateDoc(docRef, valuesToSave);
       // Log activity after successful update
       if (profile) {
-        const baseMessage = `Updated inventory item (Box ${valuesToSave.box_number} - ${valuesToSave.type})`;
+        const baseMessage = `Updated inventory item (Box ${formatLogValue(valuesToSave.box_number)} - ${formatLogValue(valuesToSave.type)})`;
         const changesMessage = `. Changes: ${changes.join(", ")}`;
         await addDoc(collection(db, "activity"), {
           message: baseMessage + changesMessage,
@@ -361,7 +363,7 @@ function RowDialog<TData extends Record<string, any>>({
       // Log deletion activity
       if (profile) {
         await addDoc(collection(db, "activity"), {
-          message: `Deleted inventory entry:\n  • Box Number: ${editValues.box_number}\n  • Type: ${editValues.type}\n  • Area Planted: ${editValues.area_planted}\n  • Year: ${editValues.year}\n  • Season: ${editValues.season}\n  • Storage Location: ${editValues.location}\n  • Description: ${editValues.description}\n  • Pedigree: ${editValues.pedigree}\n  • Weight: ${editValues.weight} kg\n  • Remarks: ${editValues.remarks}`,
+          message: `Deleted inventory entry:\n  • Box Number: ${formatLogValue(editValues.box_number, "N/A")}\n  • Type: ${formatLogValue(editValues.type)}\n  • Area Planted: ${formatLogValue(editValues.area_planted)}\n  • Year: ${formatLogValue(editValues.year)}\n  • Season: ${formatLogValue(editValues.season)}\n  • Storage Location: ${formatLogValue(editValues.location)}\n  • Description: ${formatLogValue(editValues.description)}\n  • Pedigree: ${formatLogValue(editValues.pedigree)}\n  • Weight: ${formatLogValue(editValues.weight, "N/A")} kg\n  • Remarks: ${formatLogValue(editValues.remarks)}`,
           loggedAt: new Date(),
           loggedBy: profile.email,
         });

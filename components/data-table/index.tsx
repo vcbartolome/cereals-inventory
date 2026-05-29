@@ -58,6 +58,16 @@ export function DataTable<TData extends Record<string, unknown>>({
   const [filterState, setFilterState] = useState<FilterState>({});
   const [exportDropdownOpen, setExportDropdownOpen] = useState(false);
 
+  const formatExportCellValue = (value: unknown) => {
+    if (value === undefined || value === null) return "";
+    return String(value);
+  };
+
+  const getExportGroupLabel = (value: unknown) => {
+    const label = formatExportCellValue(value).trim();
+    return label || "Unknown";
+  };
+
   const handleFilterChange = (
     fieldName: string,
     value: FilterValue | FilterValue[] | null,
@@ -103,9 +113,8 @@ export function DataTable<TData extends Record<string, unknown>>({
         ...filteredData.map((row) =>
           accessorKeys
             .map((key) => {
-              const value = (row as any)[key] ?? "";
+              const stringValue = formatExportCellValue((row as any)[key]);
               // Escape quotes and wrap in quotes if contains comma, quote, or newline
-              const stringValue = String(value);
               if (
                 stringValue.includes(",") ||
                 stringValue.includes('"') ||
@@ -160,7 +169,7 @@ export function DataTable<TData extends Record<string, unknown>>({
       const worksheetData = [
         columnInfo.map((info) => info.header), // Header row
         ...filteredData.map((row) =>
-          accessorKeys.map((key) => (row as any)[key] ?? ""),
+          accessorKeys.map((key) => formatExportCellValue((row as any)[key])),
         ),
       ];
 
@@ -224,7 +233,7 @@ export function DataTable<TData extends Record<string, unknown>>({
       // Group data by box number
       const dataByBox = filteredData.reduce(
         (acc, row) => {
-          const boxNumber = (row as any).box_number ?? "Unknown";
+          const boxNumber = getExportGroupLabel((row as any).box_number);
           if (!acc[boxNumber]) {
             acc[boxNumber] = [];
           }
@@ -255,7 +264,7 @@ export function DataTable<TData extends Record<string, unknown>>({
         const worksheetData = [
           columnInfo.map((info) => info.header), // Header row
           ...boxData.map((row) =>
-            accessorKeys.map((key) => (row as any)[key] ?? ""),
+            accessorKeys.map((key) => formatExportCellValue((row as any)[key])),
           ),
         ];
 
@@ -319,7 +328,7 @@ export function DataTable<TData extends Record<string, unknown>>({
       // Group data by year
       const dataByYear = filteredData.reduce(
         (acc, row) => {
-          const year = (row as any).year ?? "Unknown";
+          const year = getExportGroupLabel((row as any).year);
           if (!acc[year]) {
             acc[year] = [];
           }
@@ -350,7 +359,7 @@ export function DataTable<TData extends Record<string, unknown>>({
         const worksheetData = [
           columnInfo.map((info) => info.header), // Header row
           ...yearData.map((row) =>
-            accessorKeys.map((key) => (row as any)[key] ?? ""),
+            accessorKeys.map((key) => formatExportCellValue((row as any)[key])),
           ),
         ];
 

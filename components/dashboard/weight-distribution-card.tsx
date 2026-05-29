@@ -35,7 +35,16 @@ export function WeightDistributionCard({ data }: WeightDistributionCardProps) {
     if (!data.length) return { chartData: [], stats: null, typeOptions: [] };
 
     // Get unique types for filter
-    const types = [...new Set(data.map((item) => item.type))].sort();
+    const types = [
+      ...new Set(
+        data
+          .map((item) => item.type)
+          .filter(
+            (type): type is Exclude<InventoryFormValues["type"], undefined> =>
+              Boolean(type),
+          ),
+      ),
+    ].sort();
 
     // Filter data by type
     const filteredData =

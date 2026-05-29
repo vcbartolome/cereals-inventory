@@ -58,12 +58,15 @@ export function InventoryForm({ onAdd }: { onAdd?: (item: any) => void } = {}) {
   async function onSubmit(values: InventoryFormValues) {
     setIsSubmitting(true);
     try {
-      const docRef = await addDoc(collection(db, "inventory"), {
-        ...values,
-        creatorId: user?.uid,
-        addedAt: serverTimestamp(),
-        addedBy: user?.email || "unknown",
-      });
+      // Remove undefined fields to avoid Firestore errors
+      const payload: any = Object.fromEntries(
+        Object.entries(values).filter(([, v]) => v !== undefined),
+      );
+      payload.creatorId = user?.uid;
+      payload.addedAt = serverTimestamp();
+      payload.addedBy = user?.email || "unknown";
+
+      const docRef = await addDoc(collection(db, "inventory"), payload);
       // Add activity log entry
       await addDoc(collection(db, "activity"), {
         message: `Added inventory entry:\n  • Box Number: ${values.box_number}\n  • Type: ${values.type}\n  • Area Planted: ${values.area_planted}\n  • Year: ${values.year}\n  • Season: ${values.season}\n  • Storage Location: ${values.location}\n  • Description: ${values.description}\n  • Pedigree: ${values.pedigree}\n  • Weight: ${values.weight} kg\n  • Remarks: ${values.remarks}`,
