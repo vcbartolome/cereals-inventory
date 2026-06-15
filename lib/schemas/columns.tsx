@@ -53,18 +53,6 @@ export const columns: ColumnDef<InventoryFormValues>[] = [
     enableSorting: true,
   },
   {
-    id: "pedigree",
-    accessorKey: "pedigree",
-    header: "Pedigree",
-    enableSorting: true,
-  },
-  {
-    id: "weight",
-    accessorKey: "weight",
-    header: "Weight (kg)",
-    enableSorting: true,
-  },
-  {
     id: "remarks",
     accessorKey: "remarks",
     header: "Remarks",
