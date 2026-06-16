@@ -15,6 +15,7 @@ export const useRole = () => {
 
   const isAdmin = () => hasRole("admin");
   const isUser = () => hasRole("user");
+  const isAgtech = () => hasRole("agtech");
   const isApproved = () => profile?.approved || false;
 
   return {
@@ -23,6 +24,7 @@ export const useRole = () => {
     loading,
     hasRole,
     isAdmin,
+    isAgtech,
     isUser,
     isApproved,
     role: profile?.role,

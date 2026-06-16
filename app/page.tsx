@@ -197,7 +197,8 @@ export default function Login() {
       const user = result.user;
 
       // Disallow non-UP emails (only partially works, no way to actually block them with Firestore Auth)
-      if (!user.email || !user.email.endsWith("@up.edu.ph")) {
+      // if (!user.email || !user.email.endsWith("@up.edu.ph")) {
+      if (!user.email) {  //comment this out later -- curr test mode
         await auth.signOut();
         toast.error("Only @up.edu.ph email addresses are allowed.");
         return;
