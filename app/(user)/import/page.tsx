@@ -198,6 +198,14 @@ export default function BulkAdd() {
         const value = row[i as number];
         if (normalizedKey === "year") {
           obj[normalizedKey] = String(value);
+        } else if (normalizedKey === "weight") {
+          const cleaned = String(value).replace(/[$,%]/g, "").trim();
+          const parsed = parseFloat(cleaned);
+          obj[normalizedKey] = isNaN(parsed) ? value: parsed;
+        } else if (normalizedKey === "box_number") {
+          const cleaned = String(value).replace(/[$,%]/g, "").trim();
+          const parsed = parseInt(cleaned);
+          obj[normalizedKey] = isNaN(parsed) ? value: parsed;
         } else if (value !== undefined) {
           obj[normalizedKey] = value;
         }
