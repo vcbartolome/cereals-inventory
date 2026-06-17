@@ -435,14 +435,14 @@ export default function Login() {
                 </svg>
                 Continue with Google
               </Button>
-              <Button
+              {/* <Button
                 variant="outline"
                 type="button"
                 onClick={() => setShowScanner(true)}
               >
                 <ScanQrCode />
                 Scan QR
-              </Button>
+              </Button> */}
             </>
           ) : (
             <div className="w-full">
