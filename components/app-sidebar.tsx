@@ -19,11 +19,11 @@ const items = [
     url: "/dashboard",
     icon: House,
   },
-  {
-    title: "Import",
-    url: "/import",
-    icon: Upload,
-  },
+  // {
+  //   title: "Import",
+  //   url: "/import",
+  //   icon: Upload,
+  // },
   {
     title: "QR",
     url: "/scan",
@@ -52,6 +52,26 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              {profile?.role === "admin"  && (
+                <SidebarMenuItem key="Import">
+                  <SidebarMenuButton asChild>
+                    <Link href="/import">
+                      <Upload />
+                      <span>Import</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
+              {profile?.role === "agtech"  && (
+                <SidebarMenuItem key="Import">
+                  <SidebarMenuButton asChild>
+                    <Link href="/import">
+                      <Upload />
+                      <span>Import</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
               {profile?.role === "admin" && (
                 <SidebarMenuItem key="Admin">
                   <SidebarMenuButton asChild>
