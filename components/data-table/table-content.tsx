@@ -433,8 +433,6 @@ function RowDialog<TData extends Record<string, any>>({
             </div>
           </TableCell>
         </TableRow>
-        {/* <ProtectedRoute requireApproval={true} requiredRole="admin"> */}
-
         <DialogContent className="max-h-[70vh] overflow-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-medium">Edit Row</DialogTitle>

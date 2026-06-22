@@ -42,6 +42,7 @@ export function TableFilters({
   return (
     <div className="flex items-center space-x-2">
       {/* Inline box number input filter */}
+      {/* box diabled
       <Input
         type="number"
         placeholder="Box #"
@@ -65,7 +66,7 @@ export function TableFilters({
             });
           }
         }}
-      />
+      /> */}
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" className="gap-2">
