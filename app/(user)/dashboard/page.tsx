@@ -22,6 +22,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { useUser } from "@/context/UserContext";
 import { InventoryForm } from "@/components/inventory-form";
 
+
 export default function Home() {
   const { profile } = useUser();
   const [data, setData] = useState<InventoryFormValues[]>([]);
@@ -350,10 +351,12 @@ export default function Home() {
       </div>
 
       {/* Add Inventory Form */}
+      {/* Accessible only to admin or agtech role */}
+      {profile?.role === "admin" && (
       <div className="mb-8 rounded-lg border-2 border-gray-300 overflow-hidden">
         <div className="m-4">
           <h2 className="text-xl font-semibold">Add Inventory</h2>
-          <p className="text-gray-600">
+          <p className="text-gray-600"> 
             Use this form to add a new inventory item.
           </p>
         </div>
@@ -372,6 +375,32 @@ export default function Home() {
           }}
         />
       </div>
+      )}
+      {profile?.role === "agtech" && (
+      <div className="mb-8 rounded-lg border-2 border-gray-300 overflow-hidden">
+        <div className="m-4">
+          <h2 className="text-xl font-semibold">Add Inventory</h2>
+          <p className="text-gray-600"> 
+            Use this form to add a new inventory item.
+          </p>
+        </div>
+        <InventoryForm
+          onAdd={(newItem) => {
+            setData((prev) => {
+              const newData = [newItem, ...prev];
+              localStorage.setItem("inventoryData", JSON.stringify(newData));
+              localStorage.setItem(
+                "inventoryDataUpdatedAt",
+                new Date().toISOString(),
+              );
+              return newData;
+            });
+            setLastUpdated(new Date());
+          }}
+        />
+      </div>
+      )}
+
 
       {/* Analytics */}
       <div className="hidden md:block">
