@@ -52,6 +52,9 @@ import {
 } from "@/lib/schemas/inventory";
 import { useUser } from "@/context/UserContext";
 
+// import { useRole } from "@/hooks/use-role";
+
+
 interface TableContentProps<TData extends Record<string, unknown>> {
   table: RTTable<TData>;
   columns: ColumnDef<TData, unknown>[]; // Use ColumnDef from tanstack
@@ -70,6 +73,7 @@ export function TableContent<TData extends Record<string, unknown>>({
   stickyActions = false,
   disableDelete = false,
 }: TableContentProps<TData>) {
+
   const renderRows =
     table.getRowModel().rows?.length > 0 ? (
       table
@@ -202,7 +206,9 @@ function RowDialog<TData extends Record<string, any>>({
   const [justEdited, setJustEdited] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const { profile } = useUser();
+  const { profile} = useUser();
+  
+
 
   // Get editable fields from column metadata
   const getEditableFields = () => {
@@ -216,6 +222,11 @@ function RowDialog<TData extends Record<string, any>>({
       "location",
       "description",
       "pedigree",
+      "weight",
+      "remarks",
+    ];
+
+    const weightremarks = [
       "weight",
       "remarks",
     ];
@@ -239,8 +250,15 @@ function RowDialog<TData extends Record<string, any>>({
       });
     }
 
+    if (profile?.role == "agtech") {
+      return weightremarks;
+    } else if (profile?.role == "admin") {
+      return allFields;
+    } 
+
+
     // Default behavior - all fields are editable
-    return allFields;
+    return [];
   };
 
   const handleChange = (key: string, value: any) => {
@@ -415,6 +433,8 @@ function RowDialog<TData extends Record<string, any>>({
             </div>
           </TableCell>
         </TableRow>
+        {/* <ProtectedRoute requireApproval={true} requiredRole="admin"> */}
+
         <DialogContent className="max-h-[70vh] overflow-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-medium">Edit Row</DialogTitle>
