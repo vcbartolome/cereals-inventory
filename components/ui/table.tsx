@@ -4,6 +4,11 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+interface TableRowProps extends React.ComponentProps<"tr"> {
+  bgcol?: string;
+  outcol?: string;
+}
+
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
@@ -52,7 +57,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   );
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+function TableRow({ className, outcol, bgcol, ...props }: TableRowProps) {
   return (
     <tr
       data-slot="table-row"
@@ -60,6 +65,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
         "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
         className,
       )}
+      style={{borderColor: outcol || '#e9e6e6', backgroundColor: bgcol || '#ffff'}}
       {...props}
     />
   );

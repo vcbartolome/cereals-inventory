@@ -408,13 +408,28 @@ function RowDialog<TData extends Record<string, any>>({
       </TableRow>
     );
   }
+
+  const currentYear: number = new Date().getFullYear();
+  let ocol = '#e9e6e6';
+  let bcol = '#ffff';
+  // const rdata = ...row.original;
+  let nexpire = currentYear - row.original.year;
+  if (nexpire >= 5) {
+    ocol = "#ff0000";
+    bcol = "#fab6b6"
+  } else if (nexpire == 4) {
+    ocol = "#ff8000";
+    bcol = "#ffc68e"
+  }
+  
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <TableRow
+        <TableRow outcol={ocol} bgcol={bcol}
           className={`relative z-0 transition-all ${justEdited ? "animate-pulse bg-green-100" : ""}`}
         >
           {row.getVisibleCells().map((cell) => (
+            
             <TableCell key={cell.id}>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </TableCell>
