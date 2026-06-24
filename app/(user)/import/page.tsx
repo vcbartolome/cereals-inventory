@@ -11,6 +11,7 @@ import {
 import { db } from "@/lib/firebase";
 import {
   inventoryFormSchema,
+  typeOptions,
   type InventoryFormValues,
 } from "@/lib/schemas/inventory";
 import { ColumnDef } from "@tanstack/react-table";
@@ -101,10 +102,11 @@ export default function BulkAdd() {
 
   // Map enum fields to their allowed values for friendlier error messages
   const enumOptions: Record<string, string[]> = {
-    area_planted: ["LBTR", "LBPD", "CMU"],
+    area_planted: ["LBTR", "LBPD", "CMU", "Others"],
     type: ["white", "yellow", "sorghum", "special maize"],
     season: ["wet", "dry"],
   };
+
 
   function friendlyError(field: string, message: string, received?: string) {
     // Required
@@ -206,6 +208,10 @@ export default function BulkAdd() {
           const cleaned = String(value).replace(/[$,%]/g, "").trim();
           const parsed = parseInt(cleaned);
           obj[normalizedKey] = isNaN(parsed) ? value: parsed;
+        } else if (String(value).trim().length === 0 || value == null) {
+          if (normalizedKey === "location") {obj[normalizedKey] = "Others";}
+          else {obj[normalizedKey] = "N/A";}
+          
         } else if (value !== undefined) {
           obj[normalizedKey] = value;
         }

@@ -7,7 +7,7 @@ export const typeOptions = [
   "sorghum",
   "special maize",
 ] as const;
-export const areaPlantedOptions = ["LBTR", "LBPD", "CMU"] as const;
+export const areaPlantedOptions = ["LBTR", "LBPD", "CMU", "Others"] as const;
 export const seasonOptions = ["wet", "dry"] as const;
 
 // Zod schema for the inventory form
