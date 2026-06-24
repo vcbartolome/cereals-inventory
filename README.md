@@ -73,76 +73,69 @@ This application is tailored for storage operations, helping maintain accurate, 
 <!-- GETTING STARTED -->
 ## Project Structure
 
-
 Below is an overview of the main files and folders in this project, along with a brief explanation of their purpose:
 
 ```text
-├── app/
-│   ├── (user)/
-│   │   ├── admin/
-│   │   ├── box/[uuid]/
+├── backend/                  <-- Data-fetching, schemas, & Firebase services
+│   ├── firebase.ts           
+│   ├── utils.ts              
+│   └── schemas/              
+│       ├── columns.tsx
+│       └── inventory.ts
+├── frontend/                 <-- Next.js user-facing UI and logic
+│   ├── app/                  
+│   │   ├── (user)/           
+│   │   │   ├── admin/
+│   │   │   ├── box/[uuid]/
+│   │   │   ├── dashboard/
+│   │   │   ├── import/
+│   │   │   └── scan/
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/           
+│   │   ├── app-sidebar.tsx
+│   │   ├── filter.tsx
+│   │   ├── inventory-form.tsx
+│   │   ├── inventory-view-dialog.tsx
+│   │   ├── protected-route.tsx
+│   │   ├── scanner.tsx
+│   │   ├── site-header.tsx
 │   │   ├── dashboard/
-│   │   ├── import/
-│   │   ├── scan/
-│   │   └── layout.tsx
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-│   ├── app-sidebar.tsx
-│   ├── filter.tsx
-│   ├── inventory-form.tsx
-│   ├── inventory-view-dialog.tsx
-│   ├── protected-route.tsx
-│   ├── scanner.tsx
-│   ├── site-header.tsx
-│   ├── dashboard/
-│   ├── data-table/
-│   └── ui/
-├── context/
-├── hooks/
-├── lib/
-│   ├── firebase.ts
-│   ├── utils.ts
-│   └── schemas/
-├── public/
-│   ├── docs/
-│   └── screenshots/
-├── scripts/
-├── .env
-├── package.json
-├── tsconfig.json
-├── README.md
+│   │   ├── data-table/
+│   │   └── ui/
+│   ├── context/              
+│   ├── hooks/                
+│   ├── public/               
+│   │   ├── docs/
+│   │   └── screenshots/
+│   ├── components.json
+│   ├── eslint.config.mjs
+│   ├── next.config.ts
+│   ├── postcss.config.mjs
+│   ├── tsconfig.json
+│   └── package.json
+├── package.json              <-- Root workspace config
+├── README.md                 <-- Project documentation (this file)
 └── ...
 ```
 
 **Directory/Files Overview:**
 
-- `app/`: Main Next.js application folder. Contains all routes, layouts, and pages.
-  - `(user)/`: User-facing routes, grouped by feature (e.g., `admin/`, `dashboard/`, `import/`, `scan/`, etc.).
-  - `box/[uuid]/`: Dynamic route for viewing/editing inventory by box UUID.
-  - `globals.css`: Global styles for the app.
-  - `layout.tsx`, `page.tsx`: Root layout and landing page.
-- `components/`: Reusable React components.
-  - `dashboard/`: Dashboard widgets and analytics cards.
-  - `data-table/`: Data table components and utilities.
-  - `ui/`: UI primitives (buttons, dialogs, forms, etc.).
-- `context/`: React context providers (e.g., user context).
-- `hooks/`: Custom React hooks (e.g., authentication, role checks).
-- `lib/`: Library code and utilities.
-  - `firebase.ts`: Firebase client and admin setup.
-  - `utils.ts`: General utility functions.
-  - `schemas/`: Zod schemas for validation (e.g., inventory, columns).
-- `public/`: Static assets.
-  - `docs/`: Documentation (e.g., user manual).
-  - `screenshots/`: App screenshots for README/docs.
-- `scripts/`: Utility scripts (if any).
-- `.env`: Environment variables (not committed to version control).
-- `package.json`: Project dependencies and scripts.
-- `tsconfig.json`: TypeScript configuration.
-- `README.md`: Project documentation (this file).
+- `backend/`: Data-fetching services, validation schemas, and database configurations.
+  - `firebase.ts`: Firebase client initialization and setup.
+  - `utils.ts`: General utilities and helpers (e.g., classname merging).
+  - `schemas/`: Zod schemas (e.g. `inventory.ts`) and table configuration schemas (`columns.tsx`).
+- `frontend/`: User-facing Next.js UI, layouts, pages, and components.
+  - `app/`: Main Next.js App Router folders. Contains all routes, layouts, and page views.
+  - `components/`: Reusable React components (UI primitives, dashboard cards, layout sidebars, etc.).
+  - `context/`: React context providers (e.g., authentication & user contexts).
+  - `hooks/`: Custom React hooks (e.g., user role checking).
+  - `public/`: Static assets (images, document manual, etc.).
+  - Next.js configurations (`next.config.ts`, `postcss.config.mjs`, `tsconfig.json`, `components.json`, `eslint.config.mjs`, `package.json`).
+- `package.json`: Root wrapper utilizing NPM workspaces to run and manage frontend commands easily.
 
-This structure is based on the Next.js project organization conventions.
+This structure divides the project into clear concerns for frontend design and backend data models.
 
 ## Getting Started
 
