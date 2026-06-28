@@ -16,8 +16,7 @@ import {
   updateDoc,
   deleteDoc,
   serverTimestamp,
-} from "firebase/firestore";
-import { ArrowLeft } from "lucide-react";
+} from "firebase/firestore";  
 import { toast } from "sonner";
 import Image from "next/image";
 
@@ -224,15 +223,6 @@ export default function UserProfilePage() {
 
       {/* ── page ── */}
       <div className="max-w-3xl mx-auto px-6 py-8">
-
-        {/* back button */}
-        <button
-          onClick={() => router.push("/dashboard")}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800 mb-6 transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to dashboard
-        </button>
 
         <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
         <p className="text-sm text-gray-500 mt-1 mb-8">
