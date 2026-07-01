@@ -439,14 +439,24 @@ function RowDialog<TData extends Record<string, any>>({
           >
             <div className="flex items-center gap-2">
               <InventoryViewDialog entry={row.original} />
+              { profile?.role === "agtech" && (
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
                   <Pencil className="h-4 w-4 sm:hidden" />
                   <span className="hidden sm:inline">Edit</span>
                 </Button>
               </DialogTrigger>
+              )}
+               { profile?.role === "admin" && (
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Pencil className="h-4 w-4 sm:hidden" />
+                  <span className="hidden sm:inline">Edit</span>
+                </Button>
+              </DialogTrigger>
+              )}
             </div>
-          </TableCell>
+          </TableCell> 
         </TableRow>
         <DialogContent className="max-h-[70vh] overflow-auto">
           <DialogHeader>

@@ -48,7 +48,8 @@ export default function Login() {
       ...col,
       meta: {
         ...col.meta,
-        editable: col.id === "weight" || col.id === "remarks", // Weight and remarks fields are editable
+
+        editable:  col.id === "weight" || col.id === "remarks", // Weight and remarks fields are editable
       },
     }));
 
