@@ -210,6 +210,7 @@ export default function BulkAdd() {
           obj[normalizedKey] = isNaN(parsed) ? value: parsed;
         } else if (String(value).trim().length === 0 || value == null) {
           if (normalizedKey === "location") {obj[normalizedKey] = "Others";}
+          else if (normalizedKey === "remarks") {obj[normalizedKey] = value;}
           else {obj[normalizedKey] = "N/A";}
           
         } else if (value !== undefined) {
