@@ -52,6 +52,9 @@ import {
 } from "@/lib/schemas/inventory";
 import { useUser } from "@/context/UserContext";
 
+// import { useRole } from "@/hooks/use-role";
+
+
 interface TableContentProps<TData extends Record<string, unknown>> {
   table: RTTable<TData>;
   columns: ColumnDef<TData, unknown>[]; // Use ColumnDef from tanstack
@@ -70,6 +73,7 @@ export function TableContent<TData extends Record<string, unknown>>({
   stickyActions = false,
   disableDelete = false,
 }: TableContentProps<TData>) {
+
   const renderRows =
     table.getRowModel().rows?.length > 0 ? (
       table
@@ -202,7 +206,9 @@ function RowDialog<TData extends Record<string, any>>({
   const [justEdited, setJustEdited] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const { profile } = useUser();
+  const { profile} = useUser();
+  
+
 
   // Get editable fields from column metadata
   const getEditableFields = () => {
@@ -216,6 +222,11 @@ function RowDialog<TData extends Record<string, any>>({
       "location",
       "description",
       "pedigree",
+      "weight",
+      "remarks",
+    ];
+
+    const weightremarks = [
       "weight",
       "remarks",
     ];
@@ -239,8 +250,15 @@ function RowDialog<TData extends Record<string, any>>({
       });
     }
 
+    if (profile?.role == "agtech") {
+      return weightremarks;
+    } else if (profile?.role == "admin") {
+      return allFields;
+    } 
+
+
     // Default behavior - all fields are editable
-    return allFields;
+    return [];
   };
 
   const handleChange = (key: string, value: any) => {
@@ -390,13 +408,28 @@ function RowDialog<TData extends Record<string, any>>({
       </TableRow>
     );
   }
+
+  const currentYear: number = new Date().getFullYear();
+  let ocol = '#e9e6e6';
+  let bcol = '#ffff';
+  // const rdata = ...row.original;
+  let nexpire = currentYear - row.original.year;
+  if (nexpire >= 5) {
+    ocol = "#ff0000";
+    bcol = "#fab6b6"
+  } else if (nexpire == 4) {
+    ocol = "#ff8000";
+    bcol = "#ffc68e"
+  }
+  
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <TableRow
+        <TableRow outcol={ocol} bgcol={bcol}
           className={`relative z-0 transition-all ${justEdited ? "animate-pulse bg-green-100" : ""}`}
         >
           {row.getVisibleCells().map((cell) => (
+            
             <TableCell key={cell.id}>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </TableCell>
@@ -406,14 +439,24 @@ function RowDialog<TData extends Record<string, any>>({
           >
             <div className="flex items-center gap-2">
               <InventoryViewDialog entry={row.original} />
+              { profile?.role === "agtech" && (
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
                   <Pencil className="h-4 w-4 sm:hidden" />
                   <span className="hidden sm:inline">Edit</span>
                 </Button>
               </DialogTrigger>
+              )}
+               { profile?.role === "admin" && (
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Pencil className="h-4 w-4 sm:hidden" />
+                  <span className="hidden sm:inline">Edit</span>
+                </Button>
+              </DialogTrigger>
+              )}
             </div>
-          </TableCell>
+          </TableCell> 
         </TableRow>
         <DialogContent className="max-h-[70vh] overflow-auto">
           <DialogHeader>

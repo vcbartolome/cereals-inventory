@@ -17,39 +17,21 @@ export const columns: ColumnDef<InventoryFormValues>[] = [
     enableSorting: true,
   },
   {
-    id: "type",
-    accessorKey: "type",
-    header: "Type",
-    enableSorting: true,
-  },
-  {
-    id: "area_planted",
-    accessorKey: "area_planted",
-    header: "Area Planted",
-    enableSorting: true,
-  },
-  {
     id: "year",
     accessorKey: "year",
     header: "Year(s)",
     enableSorting: true,
   },
   {
+    id: "type",
+    accessorKey: "type",
+    header: "Type",
+    enableSorting: true,
+  },
+  {
     id: "season",
     accessorKey: "season",
     header: "Season",
-    enableSorting: true,
-  },
-  {
-    id: "location",
-    accessorKey: "location",
-    header: "Location",
-    enableSorting: true,
-  },
-  {
-    id: "description",
-    accessorKey: "description",
-    header: "Description",
     enableSorting: true,
   },
   {
@@ -62,6 +44,24 @@ export const columns: ColumnDef<InventoryFormValues>[] = [
     id: "weight",
     accessorKey: "weight",
     header: "Weight (kg)",
+    enableSorting: true,
+  },
+  {
+    id: "area_planted",
+    accessorKey: "area_planted",
+    header: "Area Planted",
+    enableSorting: true,
+  },
+  {
+    id: "location",
+    accessorKey: "location",
+    header: "Location",
+    enableSorting: true,
+  },
+  {
+    id: "description",
+    accessorKey: "description",
+    header: "Description",
     enableSorting: true,
   },
   {

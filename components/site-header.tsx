@@ -15,25 +15,21 @@ import { getAuth, signOut } from "firebase/auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Link from "next/link";          // add this
 
 export function SiteHeader() {
   const { toggleSidebar } = useSidebar();
   const router = useRouter();
   const { profile } = useUser();
 
-  // derive user's display name and initials
   const userName = profile?.displayName ?? "";
   const initials = userName
-    ? userName
-        .split(" ")
-        .map((part) => part[0])
-        .join("")
+    ? userName.split(" ").map((part) => part[0]).join("")
     : undefined;
 
   const handleLogout = async () => {
     const auth = getAuth(app);
     try {
-      // Clear cached inventory data on logout
       localStorage.removeItem("inventoryData");
       localStorage.removeItem("inventoryDataUpdatedAt");
       await signOut(auth);
@@ -56,14 +52,23 @@ export function SiteHeader() {
             Cereals Inventory
           </span>
         </div>
+
         <div className="flex items-center gap-2">
-          <Avatar>
-            <AvatarImage src={profile?.photoURL} alt="User Avatar" />
-            <AvatarFallback>{initials}</AvatarFallback>
-          </Avatar>
-          <span className="hidden sm:inline text-sm font-medium">
-            {userName}
-          </span>
+          {/* ── avatar + name now links to profile ── */}
+          <Link
+            href="/userprofile"
+            className="flex items-center gap-2 hover:opacity-75 transition-opacity"
+          >
+            <Avatar>
+              <AvatarImage src={profile?.photoURL} alt="User Avatar" />
+              <AvatarFallback>{initials}</AvatarFallback>
+            </Avatar>
+            <span className="hidden sm:inline text-sm font-medium">
+              {userName}
+            </span>
+          </Link>
+
+          {/* ── dropdown: profile + logout ── */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost">
@@ -71,6 +76,9 @@ export function SiteHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => router.push("/userprofile")}>
+                Profile
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={handleLogout} variant="destructive">
                 Logout
               </DropdownMenuItem>
