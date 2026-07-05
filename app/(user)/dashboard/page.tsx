@@ -247,7 +247,30 @@ export default function Home() {
 
       {/* Warning Field */}
       {showWarning && (
-        <div> Warning </div>
+        <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3">
+          <svg
+            className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+            />
+          </svg>
+          <div>
+            <p className="text-sm font-semibold text-red-700">
+              Old Seeds Detected
+            </p>
+            <p className="text-xs text-red-600 mt-0.5">
+              One or more inventory items are 4 or more years old. 
+              Review the highlighted entries in the table below.
+            </p>
+          </div>
+        </div>
       )}
 
       {/* Search Bar */}

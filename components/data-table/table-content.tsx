@@ -415,11 +415,11 @@ function RowDialog<TData extends Record<string, any>>({
   // const rdata = ...row.original;
   let nexpire = currentYear - row.original.year;
   if (nexpire >= 5) {
-    ocol = "#ff0000";
-    bcol = "#fab6b6"
+    ocol = "#dc2626";
+    bcol = "#fecaca"
   } else if (nexpire == 4) {
-    ocol = "#ff8000";
-    bcol = "#ffc68e"
+    ocol = "#ea580c";
+    bcol = "#fed7aa"
   }
   
   return (
