@@ -16,6 +16,8 @@ export type UserProfile = {
   photoURL?: string;
   role: string;
   approved: boolean;
+  position?: string;
+  createdAt?: any;
 };
 
 type UserContextValue = {

@@ -9,30 +9,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { House, QrCode, Shield, Upload } from "lucide-react";
+import { House, QrCode, Shield, Upload, UserCircle } from "lucide-react";
 import Link from "next/link";
 import { useUser } from "@/context/UserContext";
 
-const items = [
-  {
-    title: "Home",
-    url: "/dashboard",
-    icon: House,
-  },
-  // {
-  //   title: "Import",
-  //   url: "/import",
-  //   icon: Upload,
-  // },
-  {
-    title: "QR",
-    url: "/scan",
-    icon: QrCode,
-  },
-];
-
 export function AppSidebar() {
   const { profile } = useUser();
+  const canImport = profile?.role === "admin" || profile?.role === "agtech";
+
   return (
     <Sidebar
       collapsible="icon"
@@ -42,28 +26,26 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-              {profile?.role === "admin"  && (
-                <SidebarMenuItem key="Import">
-                  <SidebarMenuButton asChild>
-                    <Link href="/import">
-                      <Upload />
-                      <span>Import</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              )}
-              {profile?.role === "agtech"  && (
-                <SidebarMenuItem key="Import">
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard">
+                    <House />
+                    <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/scan">
+                    <QrCode />
+                    <span>QR</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {canImport && (
+                <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link href="/import">
                       <Upload />
@@ -72,8 +54,19 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
+
+              {/* Profile — visible to all users, sits before Admin */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/userprofile">
+                    <UserCircle />
+                    <span>Profile</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
               {profile?.role === "admin" && (
-                <SidebarMenuItem key="Admin">
+                <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link href="/admin">
                       <Shield />
