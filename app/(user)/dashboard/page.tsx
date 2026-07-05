@@ -33,6 +33,18 @@ export default function Home() {
   const [showScanner, setShowScanner] = useState(false);
   const tableColumns = columns as ColumnDef<InventoryFormValues, unknown>[];
 
+  let showWarning = false;
+  const currentYear: number = new Date().getFullYear();
+  
+  for (let item of data) {
+    let nexpire = currentYear - parseInt(String(item.year));
+    if (nexpire >= 4) {
+      showWarning = true;
+      break;
+    }
+  }
+
+
   // Helper to fetch and cache data
   const fetchAndCacheData = async () => {
     setLoading(true);
@@ -65,6 +77,8 @@ export default function Home() {
       fetchAndCacheData();
     }
   }, []);
+
+  
 
   // Advanced search function with support for operators
   const filterData = (
@@ -230,6 +244,11 @@ export default function Home() {
           <span className="hidden md:inline">Refresh</span>
         </Button>
       </div>
+
+      {/* Warning Field */}
+      {showWarning && (
+        <div> Warning </div>
+      )}
 
       {/* Search Bar */}
       <div className="mb-6">
