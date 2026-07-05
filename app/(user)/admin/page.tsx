@@ -684,7 +684,25 @@ export default function Admin() {
               </UserDetailsDialog>
               {!isSelf && (
                 <>
-                  {row.original.approved ? (
+                  {row.original.approved && row.original.role !== "admin" && (
+                    <ConfirmDialog
+                      actionName="Disapprove User"
+                      description="disapprove this user"
+                      onConfirm={() => handleDisapprove(row.original)}
+                    >
+                      <DropdownMenuItem>Disapprove</DropdownMenuItem>
+                    </ConfirmDialog>
+                  )}
+                  {!row.original.approved && row.original.role !== "admin" && (
+                    <ConfirmDialog
+                      actionName="Approve User"
+                      description="approve this user"
+                      onConfirm={() => handleApprove(row.original)}
+                    >
+                      <DropdownMenuItem>Approve</DropdownMenuItem>
+                    </ConfirmDialog>
+                  )}
+                  {/* {row.original.approved ? (
                     <ConfirmDialog
                       actionName="Disapprove User"
                       description="disapprove this user"
@@ -700,7 +718,7 @@ export default function Admin() {
                     >
                       <DropdownMenuItem>Approve</DropdownMenuItem>
                     </ConfirmDialog>
-                  )}
+                  )} */}
                   {row.original.role !== "admin" && (
                     <ConfirmDialog
                       actionName="Make Admin"
@@ -710,7 +728,7 @@ export default function Admin() {
                       <DropdownMenuItem>Make Admin</DropdownMenuItem>
                     </ConfirmDialog>
                   )}
-                   {row.original.role !== "agtech" && (
+                   {row.original.role !== "agtech" && row.original.role !== "admin" && (
                     <ConfirmDialog
                       actionName="Make AgTech"
                       description="set this user role to AgTech"
@@ -719,7 +737,7 @@ export default function Admin() {
                       <DropdownMenuItem>Make AgTech</DropdownMenuItem>
                     </ConfirmDialog>
                   )}
-                  {row.original.role !== "user" && (
+                  {row.original.role !== "user" && row.original.role !== "admin" && (
                     <ConfirmDialog
                       actionName="Make User"
                       description="set this user role to user"
@@ -728,15 +746,17 @@ export default function Admin() {
                       <DropdownMenuItem>Make User</DropdownMenuItem>
                     </ConfirmDialog>
                   )}
-                  <ConfirmDialog
-                    actionName="Delete User"
-                    description="delete this user"
-                    onConfirm={() => handleDelete(row.original)}
-                  >
-                    <DropdownMenuItem className="text-destructive">
-                      Delete
-                    </DropdownMenuItem>
-                  </ConfirmDialog>
+                  {row.original.role !== "admin" && (
+                    <ConfirmDialog
+                      actionName="Delete User"
+                      description="delete this user"
+                      onConfirm={() => handleDelete(row.original)}
+                    >
+                      <DropdownMenuItem className="text-destructive">
+                        Delete
+                      </DropdownMenuItem>
+                    </ConfirmDialog>
+                  )}
                 </>
               )}
             </DropdownMenuContent>
