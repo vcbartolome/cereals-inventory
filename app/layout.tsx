@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cereals Inventory System",
+  title: "KernelDB",
   description:
     "Manage cereal box inventories with QR code scanning, import/export, and an admin dashboard.",
   icons: {
