@@ -51,27 +51,11 @@ const chartOptions = [
     label: "Type",
     description: "Distribution by cereal type",
   },
-  {
-    value: "area_planted",
-    label: "Planted",
-    description: "Distribution by planting location",
-  },
-  { value: "year", label: "Year", description: "Distribution by year" },
   { value: "season", label: "Season", description: "Distribution by season" },
   {
     value: "location",
     label: "Location",
     description: "Distribution by storage location",
-  },
-  {
-    value: "description",
-    label: "Description",
-    description: "Distribution by description",
-  },
-  {
-    value: "pedigree",
-    label: "Pedigree",
-    description: "Distribution by pedigree",
   },
 ];
 
@@ -108,12 +92,8 @@ export function PieChartCard({
 
     return {
       type: createChartData("type"),
-      area_planted: createChartData("area_planted"),
-      year: createChartData("year"),
       season: createChartData("season"),
-      location: createChartData("location"),
-      description: createChartData("description"),
-      pedigree: createChartData("pedigree"),
+      location: createChartData("location")
     };
   }, [data, chartWeightMode]);
 
