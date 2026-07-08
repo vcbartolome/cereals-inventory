@@ -104,7 +104,7 @@ export default function BulkAdd() {
   const enumOptions: Record<string, string[]> = {
     area_planted: ["LBTR", "LBPD", "CMU", "Others"],
     type: ["white", "yellow", "sorghum", "special maize"],
-    season: ["wet", "dry"],
+    season: ["wet", "dry", "N/A"],
   };
 
 
