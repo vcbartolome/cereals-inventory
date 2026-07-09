@@ -340,34 +340,54 @@ export default function BulkAdd() {
   const handleSubmit = async () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
-    try {
-      await Promise.all(
-        data.map((row) =>
-          addDoc(collection(db, "inventory"), {
-            ...row,
-            creatorId: user?.uid,
-            addedAt: serverTimestamp(),
-            addedBy: user?.email || "unknown",
-          }),
-        ),
-      );
 
-      // Add activity log entry
+    const BATCH_SIZE = 50;
+    let successCount = 0;
+
+    try {
+      // Process in batches of 50 to avoid overwhelming Firebase
+      for (let i = 0; i < data.length; i += BATCH_SIZE) {
+        const batch = data.slice(i, i + BATCH_SIZE);
+        await Promise.all(
+          batch.map((row) =>
+            addDoc(collection(db, "inventory"), {
+              ...row,
+              creatorId: user?.uid,
+              addedAt: serverTimestamp(),
+              addedBy: user?.email || "unknown",
+            }),
+          ),
+        );
+        successCount += batch.length;
+        toast.info(`Importing... ${successCount} of ${data.length} entries done.`);
+      }
+
+      // Log activity
       await addDoc(collection(db, "activity"), {
-        message: `Bulk imported ${data.length} inventory items from ${importedFileName}`,
+        message: `Bulk imported ${successCount} inventory items from ${importedFileName}`,
         loggedAt: serverTimestamp(),
         loggedBy: user?.email || "unknown",
       });
 
+      // Clear everything only after confirmed success
       setData([]);
       setTableColumns([]);
       setImportedFileName("");
+      setMissingColumns([]);
+      setUnrecognizedColumns([]);
+      setRowErrors([]);
       setIsSheetDialogOpen(false);
       setAvailableSheets([]);
       setSelectedFile(null);
-      toast.success("Data successfully imported!");
+      if (inputRef.current) inputRef.current.value = "";
+
+      toast.success(`Successfully imported ${successCount} entries!`);
+
     } catch (error) {
       console.error("Error adding documents: ", error);
+      toast.error(
+        `Import failed after ${successCount} of ${data.length} entries. Please check the activity log and avoid re-submitting to prevent duplicates.`
+      );
     } finally {
       setIsSubmitting(false);
     }
