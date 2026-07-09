@@ -20,8 +20,7 @@ export const inventoryFormSchema = z.object({
   location: z.enum(areaPlantedOptions).optional(),
   shelf_code: z.string().optional(),
   description: z.string().optional(),
-  pedigree: z.string().trim().optional(),
-  weight: z.number().optional(),
+  pedigree: z.union([z.string().trim(), z.number().transform(String)]).optional(),  weight: z.number().optional(),
   remarks: z.string().optional(),
   id: z.string().optional(),
   addedAt: z
