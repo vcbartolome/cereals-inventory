@@ -17,7 +17,7 @@ import {
 } from "./ui/select";
 import {
   typeOptions,
-  areaPlantedOptions,
+  locationOptions,
   seasonOptions,
   type InventoryFormValues,
 } from "@/lib/schemas/inventory";
@@ -67,7 +67,7 @@ export function FilterControl({
   // Get unique values from data for text fields
   const uniqueValues = useMemo(() => {
     if (fieldName === "type") return typeOptions;
-    if (fieldName === "area_planted") return areaPlantedOptions;
+    if (fieldName === "area_planted") return locationOptions;
     if (fieldName === "season") return seasonOptions;
 
     // For other text fields, get unique values from data

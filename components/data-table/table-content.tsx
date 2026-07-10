@@ -47,7 +47,7 @@ import { toast } from "sonner";
 import type { Row } from "@tanstack/react-table";
 import {
   typeOptions,
-  areaPlantedOptions,
+  locationOptions,
   seasonOptions,
 } from "@/lib/schemas/inventory";
 import { useUser } from "@/context/UserContext";
