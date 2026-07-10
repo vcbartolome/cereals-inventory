@@ -208,6 +208,8 @@ export default function BulkAdd() {
           const cleaned = String(value).replace(/[$,%]/g, "").trim();
           const parsed = parseInt(cleaned);
           obj[normalizedKey] = isNaN(parsed) ? value: parsed;
+        } else if (normalizedKey === "pedigree") {
+          obj[normalizedKey] = typeof(value)!=='string' ? String(value): value;
         } else if (String(value).trim().length === 0 || value == null) {
           if (normalizedKey === "location") {obj[normalizedKey] = "Others";}
           else if (normalizedKey === "remarks") {obj[normalizedKey] = "";}
