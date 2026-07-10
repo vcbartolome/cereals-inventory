@@ -7,7 +7,7 @@ export const typeOptions = [
   "sorghum",
   "special maize",
 ] as const;
-export const areaPlantedOptions = ["LBTR", "LBPD", "CMU", "Others"] as const;
+export const locationOptions = ["LBTR", "LBPD", "CMU", "Others"] as const;
 export const seasonOptions = ["wet", "dry", "N/A"] as const;
 
 // Zod schema for the inventory form
@@ -17,7 +17,7 @@ export const inventoryFormSchema = z.object({
   year: z.string().optional(),
   season: z.enum(seasonOptions).optional(),
   box_number: z.number().int().gte(0, { message: "Required" }),
-  location: z.enum(areaPlantedOptions).optional(),
+  location: z.enum(locationOptions).optional(),
   shelf_code: z.string().optional(),
   description: z.string().optional(),
   pedigree: z.string().trim().optional(),

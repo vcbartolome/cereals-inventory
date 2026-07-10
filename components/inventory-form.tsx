@@ -25,7 +25,7 @@ import { useForm } from "react-hook-form";
 import {
   inventoryFormSchema,
   typeOptions,
-  areaPlantedOptions,
+  locationOptions,
   seasonOptions,
   InventoryFormValues,
 } from "@/lib/schemas/inventory";
@@ -236,7 +236,7 @@ export function InventoryForm({ onAdd }: { onAdd?: (item: any) => void } = {}) {
                       <SelectValue placeholder="Select location" />
                     </SelectTrigger>
                     <SelectContent>
-                      {areaPlantedOptions.map((option) => (
+                      {locationOptions.map((option) => (
                         <SelectItem key={option} value={option}>
                           {option}
                         </SelectItem>

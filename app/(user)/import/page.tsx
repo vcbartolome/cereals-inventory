@@ -102,7 +102,7 @@ export default function BulkAdd() {
 
   // Map enum fields to their allowed values for friendlier error messages
   const enumOptions: Record<string, string[]> = {
-    area_planted: ["LBTR", "LBPD", "CMU", "Others"],
+    location: ["LBTR", "LBPD", "CMU", "Others"],
     type: ["white", "yellow", "sorghum", "special maize"],
     season: ["wet", "dry", "N/A"],
   };
@@ -210,6 +210,12 @@ export default function BulkAdd() {
           obj[normalizedKey] = isNaN(parsed) ? value: parsed;
         } else if (normalizedKey === "pedigree") {
           obj[normalizedKey] = typeof(value)!=='string' ? String(value): value;
+        } else if (normalizedKey === "location" && value != null) {
+          obj[normalizedKey] = String(value)!=="Others" ? String(value).toUpperCase(): value;
+        } else if (normalizedKey === "type" && value != null) {
+          obj[normalizedKey] = String(value).toLowerCase();
+        } else if (normalizedKey === "season" && value != null) {
+          obj[normalizedKey] = String(value).toLowerCase();
         } else if (String(value).trim().length === 0 || value == null) {
           if (normalizedKey === "location") {obj[normalizedKey] = "Others";}
           else if (normalizedKey === "remarks") {obj[normalizedKey] = "";}
