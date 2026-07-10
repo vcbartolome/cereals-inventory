@@ -62,9 +62,49 @@ export function LowStockCard({ data }: LowStockCardProps) {
       <CardContent>
         <div className="space-y-2">
           {lowStockItems.length === 0 ? (
+            <>
             <div className="text-sm text-gray-600">
               All items are well stocked!
             </div>
+            <div className="flex items-center justify-between mt-4 gap-2 pt-2 border-t">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">Threshold:</span>
+                  <Select
+                    value={"0"}
+                    onValueChange={(value) =>
+                      setLowStockThreshold(Number(value))
+                    }
+                  >
+                    <SelectTrigger className="w-20 h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2">2 kg</SelectItem>
+                      <SelectItem value="1">1 kg</SelectItem>
+                      <SelectItem value="0.5">0.5 kg</SelectItem>
+                      <SelectItem value="0">0 kg</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">Sort:</span>
+                  <Select
+                    value={lowStockSortBy}
+                    onValueChange={setLowStockSortBy}
+                  >
+                    <SelectTrigger className="w-24 h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="weight">Weight</SelectItem>
+                      <SelectItem value="box_number">Box #</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            
+            </>
+          
           ) : (
             <>
               <div className="max-h-32 overflow-y-auto">
@@ -80,7 +120,7 @@ export function LowStockCard({ data }: LowStockCardProps) {
                         {item.box_number || "N/A"}
                       </span>
                       <span className="text-xs font-medium text-red-600">
-                        {(item.weight || 0).toFixed(1)}kg
+                        {(item.weight || 0).toFixed(3)}kg
                       </span>
                     </div>
                   ))}
