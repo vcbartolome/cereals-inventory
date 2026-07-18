@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ScanLine, RotateCcw } from "lucide-react";
-import { QRScanner } from "@/components/scanner";
+import { ScanLine, RotateCcw, Loader2 } from "lucide-react";import { QRScanner } from "@/components/scanner";
+import { toast } from "sonner";
 import {
   collection,
   getDocs,
@@ -22,7 +22,6 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { useUser } from "@/context/UserContext";
 import { InventoryForm } from "@/components/inventory-form";
 
-
 export default function Home() {
   const { profile } = useUser();
   const [data, setData] = useState<InventoryFormValues[]>([]);
@@ -31,7 +30,9 @@ export default function Home() {
   const [selectedChart, setSelectedChart] = useState<string>("type");
   const [chartWeightMode, setChartWeightMode] = useState<boolean>(false);
   const [showScanner, setShowScanner] = useState(false);
+  const [isDeletingPage, setIsDeletingPage] = useState(false);
   const tableColumns = columns as ColumnDef<InventoryFormValues, unknown>[];
+  const [currentPageData, setCurrentPageData] = useState<InventoryFormValues[]>([]);
 
   let showWarning = false;
   const currentYear: number = new Date().getFullYear();
@@ -331,6 +332,46 @@ export default function Home() {
           data={filteredData}
           columns={tableColumns}
           loading={loading}
+          onPageDataChange={(pageData) => setCurrentPageData(pageData as InventoryFormValues[])}
+          extraActions={
+            profile?.role === "admin" ? (
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={async () => {
+                  if (!confirm(`Delete ${currentPageData.length} entries on this page? This cannot be undone.`)) return;
+                  setIsDeletingPage(true);
+                  try {
+                    const { deleteDoc, doc: fsDoc } = await import("firebase/firestore");
+                    await Promise.all(
+                      currentPageData.map(item =>
+                        fsDoc(db, "inventory", item.id!)
+                      ).map(ref => deleteDoc(ref))
+                    );
+                    const deletedIds = new Set(currentPageData.map(i => i.id));
+                    setData(prev => {
+                      const updated = prev.filter(item => !deletedIds.has(item.id));
+                      localStorage.setItem("inventoryData", JSON.stringify(updated));
+                      return updated;
+                    });
+                    toast.success(`Deleted ${currentPageData.length} entries.`);
+                  } catch (err) {
+                    console.error(err);
+                    toast.error("Failed to delete entries.");
+                  } finally {
+                    setIsDeletingPage(false);
+                  }
+                }}
+                disabled={isDeletingPage || currentPageData.length === 0}
+              >
+                {isDeletingPage ? (
+                  <><Loader2 className="h-4 w-4 animate-spin mr-1" />Deleting...</>
+                ) : (
+                  `Delete Page (${currentPageData.length})`
+                )}
+              </Button>
+            ) : undefined
+          }
           filterableFields={[
             { label: "Type", fieldName: "type" },
             { label: "Area Planted", fieldName: "area_planted" },

@@ -10,8 +10,7 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { FilterState, FilterValue } from "@/components/filter";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +37,8 @@ interface DataTableProps<TData extends Record<string, unknown>> {
   showExport?: boolean;
   stickyActions?: boolean;
   disableDelete?: boolean;
+  extraActions?: React.ReactNode;
+  onPageDataChange?: (pageData: TData[]) => void;
 }
 
 export function DataTable<TData extends Record<string, unknown>>({
@@ -49,6 +50,8 @@ export function DataTable<TData extends Record<string, unknown>>({
   showExport = true,
   stickyActions = false,
   disableDelete = false,
+  extraActions,
+  onPageDataChange,
 }: DataTableProps<TData>) {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
@@ -416,12 +419,19 @@ export function DataTable<TData extends Record<string, unknown>>({
     getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn: globalFilterFn, // Use the extracted globalFilterFn
   });
+  
+  useEffect(() => {
+    const pageRows = table.getRowModel().rows.map(row => row.original);
+    onPageDataChange?.(pageRows);
+  }, [table.getState().pagination.pageIndex, table.getState().pagination.pageSize, table.getState().globalFilter, table.getState().sorting]);
 
   const showFilters = filterableFields && filterableFields.length > 0;
 
   // Wrap export actions to hide on small screens
-  const exportActions = showExport ? (
-    <div className="hidden sm:block">
+  const exportActions = (
+    <div className="hidden sm:flex items-center gap-2">
+      {extraActions}
+      {showExport && (
       <DropdownMenu
         open={exportDropdownOpen}
         onOpenChange={setExportDropdownOpen}
@@ -450,8 +460,9 @@ export function DataTable<TData extends Record<string, unknown>>({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      )}
     </div>
-  ) : null;
+  );
 
   return (
     <div className="w-full flex-col justify-start gap-6">
